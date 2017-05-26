@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected Void doInBackground(String... params) {
             for (String msg : params) {
                 Tuple tuple = new Tuple();
+                tuple.put("char32", "demo");
                 tuple.put("char64", msg);
                 try {
                     mTable.add(tuple);
@@ -76,8 +77,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 StringBuilder sb = new StringBuilder();
                 for (Tuple item : items) {
-                    sb.append(item.get("char64"));
-                    sb.append("\n");
+                    String nm = item.get("char32");
+                    if (nm == null) {
+                        nm = "NOBODY";
+                    }
+
+                    String msg = item.get("char64");
+                    if (msg == null) {
+                        msg = "null";
+                    }
+
+                    sb.append(nm + ": " + msg + "\n");
                 }
 
                 return sb.toString();
